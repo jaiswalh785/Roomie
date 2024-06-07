@@ -27,10 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# AUTH_USER_MODEL = "users_management.UserManage" 
+AUTH_USER_MODEL = 'RommieAPP.User'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'RommieAPP',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -69,17 +72,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Roomie.wsgi.application'
 
+# 'mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority'
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': 'roomie',
+            'ENFORCE_SCHEMA': False,
+            'CLIENT': {
+                'host':'mongodb+srv://User_369:TonyStark007@cluster0.37ajaix.mongodb.net/roomie?retryWrites=true&w=majority'
+                
+            }  
+        }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
