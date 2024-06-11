@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view , authentication_classes , permission_classes
 from rest_framework import status as stus
 from datetime import datetime
+from .serializer import *
 from .queries import *
 
 @api_view(['POST'])
@@ -13,7 +14,7 @@ from .queries import *
 @permission_classes((IsAuthenticated,))
 def UserInsert_f(request):
     try:
-        serializer = CounsellorRatingInsertSerializer(data=request.data)
+        serializer = InsertUserSerializer(data=request.data)
         if serializer.is_valid():
             import uuid
             user_uuid = str(uuid.uuid4())
