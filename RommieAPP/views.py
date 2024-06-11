@@ -10,8 +10,8 @@ from .serializer import *
 from .queries import *
 
 @api_view(['POST'])
-@authentication_classes((TokenAuthentication,))
-@permission_classes((IsAuthenticated,))
+# @authentication_classes((TokenAuthentication,))
+# @permission_classes((IsAuthenticated,))
 def UserInsert_f(request):
     try:
         serializer = InsertUserSerializer(data=request.data)
@@ -29,10 +29,10 @@ def UserInsert_f(request):
                 "UpdatedBy": "system",
                 "UpdatedAt": datetime.now()
             }
-            userData= CounsellorRatingInsert_q(list(Data.values()))
+            serializer.save(Data)
             
            
-            if userData:
+            if 1:
                 json_data = {
                     'status_code': 200 ,
                     'status':'Success',

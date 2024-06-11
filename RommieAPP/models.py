@@ -10,7 +10,7 @@ class User(AbstractUser):
     user_uuid = models.CharField(max_length=45)
     user_type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
-    profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+    # profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
     # phone_number = models.CharField(max_length=15, null=True, blank=True)
     # phone_number = models.CharField(max_length=15, null=True, blank=True)
     def __str__(self):
