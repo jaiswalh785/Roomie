@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-n1!9xmy)bt62aicfj+n6#3@85oakk-a%uy6$^!dugga667!&x$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['desktop-s3m9m8r','192.168.0.110','127.0.0.1']
 
 # AUTH_USER_MODEL = "users_management.UserManage" 
 AUTH_USER_MODEL = 'RommieAPP.User'
