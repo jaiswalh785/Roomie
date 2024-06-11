@@ -8,19 +8,18 @@ from rest_framework import status as stus
 from datetime import datetime
 from .serializer import *
 from .queries import *
-from models import User
-
+from .models import User
+import pymongo
 @api_view(['POST'])
 def UserInsert_f(request):
     try:
-        print("Request received.")
-        print(f"Request data: {request.data}")
+        connect_string='mongodb+srv://User_369:TonyStark007@cluster0.37ajaix.mongodb.net/roomie?retryWrites=true&w=majority'
 
         serializer = InsertUserSerializer(data=request.data)
-        print(f"Serializer data: {serializer}")
 
         if serializer.is_valid():
-            print("Serializer is valid.")
+            print('====================================11')
+            # print("Serializer is valid.")
             # import uuid
             # user_uuid = str(uuid.uuid4())
             Data = {
@@ -30,25 +29,29 @@ def UserInsert_f(request):
                 "IsDeleted": "0"
             }
             print(Data)
-            # serializer.save(**Data)
-            User.save(**Data)
+            # saved=serializer.save(**Data)
+            my_client = pymongo.MongoClient(connect_string)
+
+            # First define the database name
+            dbname = my_client['roomie']
+
+            # Now get/create collection name (remember that you will see the database in your mongodb cluster only after you create a collection
+            collection_name = dbname["user"]
+            # user = User()
+            # print('========= user',user)
+            collection_name.save(**Data)
+            # User.save(**Data)
+            print('==================================== after')
             
-            if 1:
-                json_data = {
-                    'status_code': 200 ,
-                    'status':'Success',
-                    'data':Data,
-                    'message': 'Data Inserted successfully',
-                }
-                return Response(json_data,status=stus.HTTP_200_OK)
-            else:
-                json_data = {
-                    'status_code': 200,
-                    'status': 'Failed',
-                    'data':'',
-                    'message': 'Data Insertion Failed',
-                }
-                return Response(json_data,status=stus.HTTP_200_OK)
+        
+            json_data = {
+                'status_code': 200 ,
+                'status':'Success',
+                'data':'',
+                'message': 'Data Inserted successfully',
+            }
+            return Response(json_data,status=stus.HTTP_200_OK)
+        
         else:
             print("Serializer is invalid.")
             print(f"Errors: {serializer.errors}")
